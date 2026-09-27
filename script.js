@@ -112,14 +112,25 @@
     location.href = 'https://wa.me/916297638725?text=' + encodeURIComponent(note);
   });
 
+  // Restore a page's visibility when the browser brings it back from history.
+  let pageTransitionTimer;
+  const resetPageTransition = () => {
+    clearTimeout(pageTransitionTimer);
+    document.body.style.removeProperty('opacity');
+    document.body.style.removeProperty('transition');
+  };
+  addEventListener('pageshow', resetPageTransition);
+  addEventListener('pagehide', resetPageTransition);
+
   // A short fade gives internal navigation continuity while leaving normal link behaviour intact.
   if (!reduceMotion) document.querySelectorAll('a[href$=".html"]').forEach(a => a.addEventListener('click', e => {
     if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || a.target === '_blank') return;
     const href = a.getAttribute('href');
     if (!href || href === location.pathname.split('/').pop()) return;
     e.preventDefault();
+    clearTimeout(pageTransitionTimer);
     document.body.style.transition = 'opacity .22s ease';
     document.body.style.opacity = '0';
-    setTimeout(() => { location.href = href; }, 220);
+    pageTransitionTimer = setTimeout(() => { location.href = href; }, 220);
   }));
 })();
