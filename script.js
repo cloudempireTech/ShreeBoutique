@@ -1,12 +1,51 @@
 (() => {
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const heroVideo = document.querySelector('.hero-video');
-  if (heroVideo && !reduceMotion) {
-    const source = heroVideo.querySelector('source[data-src]');
-    if (source) {
-      source.src = source.dataset.src;
-      heroVideo.load();
-      heroVideo.play().catch(() => {});
+  const heroPlayButton = document.querySelector('.hero-video-play');
+  if (heroVideo) {
+    if (reduceMotion) {
+      heroVideo.autoplay = false;
+      heroVideo.pause();
+    } else {
+      heroVideo.muted = true;
+      heroVideo.defaultMuted = true;
+      heroVideo.playsInline = true;
+      const showPlayButton = () => {
+        if (heroPlayButton && !heroVideo.closest('.home-hero')?.classList.contains('video-unavailable')) heroPlayButton.hidden = false;
+      };
+      const hidePlayButton = () => { if (heroPlayButton) heroPlayButton.hidden = true; };
+      const showPoster = () => {
+        heroVideo.closest('.home-hero')?.classList.add('video-unavailable');
+        hidePlayButton();
+      };
+      const playHero = () => {
+        const result = heroVideo.play();
+        if (result?.then) result.then(hidePlayButton).catch(showPlayButton);
+        else if (!heroVideo.paused) hidePlayButton();
+      };
+      heroVideo.addEventListener('playing', () => {
+        heroVideo.closest('.home-hero')?.classList.remove('video-unavailable');
+        hidePlayButton();
+      });
+      heroVideo.addEventListener('error', showPoster);
+      heroVideo.querySelector('source')?.addEventListener('error', showPoster);
+      heroVideo.addEventListener('pause', () => { if (!document.hidden) showPlayButton(); });
+      heroPlayButton?.addEventListener('click', playHero);
+      playHero();
+      setTimeout(() => { if (heroVideo.paused) showPlayButton(); }, 1800);
+      setTimeout(() => {
+        if (heroVideo.readyState < 2) {
+          if (heroVideo.error || heroVideo.networkState === 3) showPoster();
+          else showPlayButton();
+        }
+      }, 4000);
+      new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting && heroVideo.paused) playHero();
+      }, {threshold:.25}).observe(heroVideo);
+      addEventListener('pageshow', event => { if (event.persisted && heroVideo.paused) playHero(); });
+      addEventListener('visibilitychange', () => {
+        if (!document.hidden && heroVideo.paused && heroVideo.getBoundingClientRect().top < innerHeight) playHero();
+      });
     }
   }
   const header = document.querySelector('.site-header');
