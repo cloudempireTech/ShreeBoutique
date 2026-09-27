@@ -119,7 +119,7 @@
     document.body.style.removeProperty('opacity');
     document.body.style.removeProperty('transition');
   };
-  addEventListener('pageshow', resetPageTransition);
+  addEventListener('pageshow', event => { if (event.persisted) resetPageTransition(); });
   addEventListener('pagehide', resetPageTransition);
 
   // A short fade gives internal navigation continuity while leaving normal link behaviour intact.
