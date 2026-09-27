@@ -36,13 +36,13 @@
   const animateCount = el => {
     const end = Number(el.dataset.count);
     if (!Number.isFinite(end)) return;
-    if (reduceMotion) { el.textContent = end.toLocaleString('en-IN'); return; }
+    if (reduceMotion) { el.textContent = end.toFixed(Number(el.dataset.decimals || 0)); return; }
     const start = performance.now();
     const duration = 1500;
     const frame = now => {
       const progress = Math.min(1, (now-start)/duration);
       const eased = 1 - Math.pow(1-progress,3);
-      el.textContent = Math.round(end*eased).toLocaleString('en-IN');
+      el.textContent = (end*eased).toFixed(Number(el.dataset.decimals || 0));
       if (progress < 1) requestAnimationFrame(frame);
     };
     requestAnimationFrame(frame);
@@ -101,19 +101,15 @@
   lightbox?.querySelector('.lightbox-close')?.addEventListener('click', () => lightbox.close());
   lightbox?.addEventListener('click', e => { if (e.target === lightbox) lightbox.close(); });
 
-  document.querySelector('#enquiry-form')?.addEventListener('submit', async e => {
+  document.querySelector('#enquiry-form')?.addEventListener('submit', e => {
     e.preventDefault();
     const form = e.currentTarget;
     if (!form.reportValidity()) return;
     const data = new FormData(form);
     const note = `Hello Shree Boutique, my name is ${data.get('name')}. I'm interested in ${data.get('interest')}.${data.get('message') ? ' ' + data.get('message') : ''}`;
     const status = document.querySelector('#form-status');
-    try {
-      await navigator.clipboard.writeText(note);
-      status.textContent = 'Copied. Share your note when you call or visit Facebook.';
-    } catch {
-      status.textContent = 'Copy this note to share: ' + note;
-    }
+    status.textContent = 'Opening WhatsApp with your enquiry…';
+    location.href = 'https://wa.me/916297638725?text=' + encodeURIComponent(note);
   });
 
   // A short fade gives internal navigation continuity while leaving normal link behaviour intact.

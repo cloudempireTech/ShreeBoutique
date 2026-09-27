@@ -6,8 +6,10 @@ A static, responsive website built with HTML, CSS, and JavaScript for Shree Bout
 
 From this directory, run `python -m http.server 8000` and open `http://localhost:8000/`.
 
-The site is intended for GitHub Pages at `https://cloudempiretech.github.io/ShreeBoutique/`. The HTML files, assets, `sitemap.xml`, and `robots.txt` are all at the repository root, so no build step is required.
+The site is intended for GitHub Pages at `https://cloudempiretech.github.io/ShreeBoutique/`. The HTML files, assets, `sitemap.xml`, and `robots.txt` are at the repository root, so no build step is required.
 
-## Media and business details
+## Business details and media
 
-See [ASSET_SOURCES.md](ASSET_SOURCES.md) for the origin of each visual and the public details used in the site. Street locations differ between supplied listings; visitors are asked to confirm directions with the boutique.
+The verified location supplied by the business is Rathtala Rd, Bardhaman, West Bengal 713102, and the WhatsApp contact is +91 6297638725. The form opens a prefilled WhatsApp message and does not store submissions.
+
+See [ASSET_SOURCES.md](ASSET_SOURCES.md) for visual provenance and the distinction between customer photos, public listing photos, and editorial imagery. Sample review cards are clearly labeled and are not customer testimonials.

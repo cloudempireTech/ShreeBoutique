@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://cloudempiretech.github.io/ShreeBoutique/index.html</loc></url>
   <url><loc>https://cloudempiretech.github.io/ShreeBoutique/about.html</loc></url>
-  <url><loc>https://cloudempiretech.github.io/ShreeBoutique/collections.html</loc></url>
-  <url><loc>https://cloudempiretech.github.io/ShreeBoutique/sarees.html</loc></url>
   <url><loc>https://cloudempiretech.github.io/ShreeBoutique/boutique-wear.html</loc></url>
-  <url><loc>https://cloudempiretech.github.io/ShreeBoutique/gallery.html</loc></url>
-  <url><loc>https://cloudempiretech.github.io/ShreeBoutique/testimonials.html</loc></url>
-  <url><loc>https://cloudempiretech.github.io/ShreeBoutique/faq.html</loc></url>
+  <url><loc>https://cloudempiretech.github.io/ShreeBoutique/collections.html</loc></url>
   <url><loc>https://cloudempiretech.github.io/ShreeBoutique/contact.html</loc></url>
+  <url><loc>https://cloudempiretech.github.io/ShreeBoutique/faq.html</loc></url>
+  <url><loc>https://cloudempiretech.github.io/ShreeBoutique/gallery.html</loc></url>
+  <url><loc>https://cloudempiretech.github.io/ShreeBoutique/index.html</loc></url>
+  <url><loc>https://cloudempiretech.github.io/ShreeBoutique/kurtis.html</loc></url>
+  <url><loc>https://cloudempiretech.github.io/ShreeBoutique/testimonials.html</loc></url>
 </urlset>
